@@ -20,8 +20,11 @@ RUN adduser -D -u 1000 nginx && \
     mkdir /run/nginx && \
     apk --no-cache add nginx && \
     rm -rf /etc/nginx/conf.d/* && \
+# curl
+    apk --no-cache add curl && \
 # php-fpm
-    apk --no-cache add curl php7 php7-fpm php7-json php7-mbstring \
+    apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community add \
+        php7 php7-fpm php7-json php7-mbstring \
         php7-pdo php7-pdo_mysql php7-pdo_sqlite php7-mysqli php7-sqlite3 \
         php7-gd php7-session && \
     mkdir /var/run/php-fpm/ && adduser -D phpfpm && \
