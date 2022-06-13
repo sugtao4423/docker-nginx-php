@@ -24,10 +24,10 @@ RUN adduser -D -u 1000 nginx && \
     apk --no-cache add curl && \
 # php-fpm
     apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community add \
-        php7 php7-curl php7-dom php7-exif php7-fileinfo php7-fpm \
-        php7-gd php7-iconv php7-imagick php7-json php7-mbstring \
-        php7-mysqli php7-pdo php7-pdo_mysql php7-pdo_sqlite \
-        php7-session php7-sqlite3 php7-zip && \
+        php81 php81-curl php81-dom php81-exif php81-fileinfo php81-fpm \
+        php81-gd php81-iconv php81-pecl-imagick php81-json php81-mbstring \
+        php81-mysqli php81-pdo php81-pdo_mysql php81-pdo_sqlite \
+        php81-session php81-sqlite3 php81-zip && \
     mkdir /var/run/php-fpm/ && adduser -D phpfpm && \
 # clear apk cache
     rm -rf /var/cache/apk/*
@@ -53,4 +53,3 @@ RUN chmod +x /run.sh
 EXPOSE 80
 
 CMD ["/run.sh"]
-
