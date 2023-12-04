@@ -22,6 +22,8 @@ RUN adduser -D -u 1000 nginx && \
     mkdir /run/nginx && \
     apk --no-cache add nginx && \
     rm -rf /etc/nginx/conf.d/* && \
+    ln -s /dev/stdout /var/log/nginx/access.log && \
+    ln -s /dev/stderr /var/log/nginx/error.log && \
 # curl
     apk --no-cache add curl && \
 # php-fpm
@@ -31,6 +33,7 @@ RUN adduser -D -u 1000 nginx && \
         ${PHP}-mysqli ${PHP}-pdo ${PHP}-pdo_mysql ${PHP}-pdo_sqlite \
         ${PHP}-session ${PHP}-sqlite3 ${PHP}-zip && \
     mkdir /var/run/php-fpm/ && adduser -D phpfpm && \
+    ln -s /dev/stderr /var/log/${PHP}/error.log && \
 # clear apk cache
     rm -rf /var/cache/apk/*
 

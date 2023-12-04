@@ -19,13 +19,11 @@ sed -e "s|;*memory_limit\s*=.*|memory_limit = ${PHP_MEMORY_LIMIT}|i" \
     -e "s|;date.timezone\s*=.*|date.timezone = \"${PHP_TIMEZONE}\"|i" \
     -i /etc/php81/php.ini
 
-echo 'start php-fpm81'
 php-fpm81 -D
-echo 'started php-fpm81'
+echo 'php-fpm81 started'
 
-echo 'start nginx'
 nginx -g 'daemon on;'
-echo 'started nginx'
+echo 'nginx started'
 
 trap_term(){
     echo 'exit'
