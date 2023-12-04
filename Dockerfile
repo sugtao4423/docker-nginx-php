@@ -2,6 +2,8 @@ FROM alpine:latest
 
 LABEL maintainer "sugtao4423"
 
+ARG PHP="php81"
+
 RUN adduser -D -u 1000 nginx && \
     apk update && \
 # bash
@@ -24,10 +26,10 @@ RUN adduser -D -u 1000 nginx && \
     apk --no-cache add curl && \
 # php-fpm
     apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community add \
-        php81 php81-curl php81-dom php81-exif php81-fileinfo php81-fpm \
-        php81-gd php81-iconv php81-pecl-imagick php81-json php81-mbstring \
-        php81-mysqli php81-pdo php81-pdo_mysql php81-pdo_sqlite \
-        php81-session php81-sqlite3 php81-zip && \
+        ${PHP} ${PHP}-curl ${PHP}-dom ${PHP}-exif ${PHP}-fileinfo ${PHP}-fpm \
+        ${PHP}-gd ${PHP}-iconv ${PHP}-pecl-imagick ${PHP}-json ${PHP}-mbstring \
+        ${PHP}-mysqli ${PHP}-pdo ${PHP}-pdo_mysql ${PHP}-pdo_sqlite \
+        ${PHP}-session ${PHP}-sqlite3 ${PHP}-zip && \
     mkdir /var/run/php-fpm/ && adduser -D phpfpm && \
 # clear apk cache
     rm -rf /var/cache/apk/*
