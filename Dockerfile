@@ -2,7 +2,7 @@ FROM alpine:latest
 
 LABEL maintainer="sugtao4423"
 
-ARG PHP="php84"
+ENV PHP_VER="84"
 
 RUN adduser -D -u 1000 nginx && \
     apk update && \
@@ -28,12 +28,25 @@ RUN adduser -D -u 1000 nginx && \
     apk --no-cache add curl && \
 # php-fpm
     apk --no-cache add \
-        ${PHP} ${PHP}-curl ${PHP}-dom ${PHP}-exif ${PHP}-fileinfo ${PHP}-fpm \
-        ${PHP}-gd ${PHP}-iconv ${PHP}-pecl-imagick ${PHP}-mbstring \
-        ${PHP}-mysqli ${PHP}-pdo ${PHP}-pdo_mysql ${PHP}-pdo_sqlite \
-        ${PHP}-session ${PHP}-sqlite3 ${PHP}-zip && \
+        php${PHP_VER} \
+        php${PHP_VER}-curl \
+        php${PHP_VER}-dom \
+        php${PHP_VER}-exif \
+        php${PHP_VER}-fileinfo \
+        php${PHP_VER}-fpm \
+        php${PHP_VER}-gd \
+        php${PHP_VER}-iconv \
+        php${PHP_VER}-pecl-imagick \
+        php${PHP_VER}-mbstring \
+        php${PHP_VER}-mysqli \
+        php${PHP_VER}-pdo \
+        php${PHP_VER}-pdo_mysql \
+        php${PHP_VER}-pdo_sqlite \
+        php${PHP_VER}-session \
+        php${PHP_VER}-sqlite3 \
+        php${PHP_VER}-zip && \
     mkdir /var/run/php-fpm/ && adduser -D phpfpm && \
-    ln -s /dev/stderr /var/log/${PHP}/error.log && \
+    ln -s /dev/stderr /var/log/php${PHP_VER}/error.log && \
 # clear apk cache
     rm -rf /var/cache/apk/*
 
