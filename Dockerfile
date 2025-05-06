@@ -2,7 +2,7 @@ FROM alpine:latest
 
 LABEL maintainer="sugtao4423"
 
-ARG PHP="php81"
+ARG PHP="php84"
 
 RUN adduser -D -u 1000 nginx && \
     apk update && \
@@ -27,9 +27,9 @@ RUN adduser -D -u 1000 nginx && \
 # curl
     apk --no-cache add curl && \
 # php-fpm
-    apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community add \
+    apk --no-cache add \
         ${PHP} ${PHP}-curl ${PHP}-dom ${PHP}-exif ${PHP}-fileinfo ${PHP}-fpm \
-        ${PHP}-gd ${PHP}-iconv ${PHP}-pecl-imagick ${PHP}-json ${PHP}-mbstring \
+        ${PHP}-gd ${PHP}-iconv ${PHP}-pecl-imagick ${PHP}-mbstring \
         ${PHP}-mysqli ${PHP}-pdo ${PHP}-pdo_mysql ${PHP}-pdo_sqlite \
         ${PHP}-session ${PHP}-sqlite3 ${PHP}-zip && \
     mkdir /var/run/php-fpm/ && adduser -D phpfpm && \
