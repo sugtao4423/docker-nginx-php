@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-LABEL maintainer "sugtao4423"
+LABEL maintainer="sugtao4423"
 
 ARG PHP="php81"
 
