@@ -67,6 +67,9 @@ ENV PHP_FPM_USER="nginx" \
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --chmod=755 run.sh /usr/local/bin/run.sh
 
+VOLUME ["/html"]
 EXPOSE 80
+
+WORKDIR /html
 
 CMD ["run.sh"]
