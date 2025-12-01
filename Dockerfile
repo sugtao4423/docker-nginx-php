@@ -4,7 +4,8 @@ LABEL maintainer="sugtao4423"
 
 ENV PHP_VER="84"
 
-RUN adduser -D -u 1000 nginx && \
+RUN addgroup -g 1000 -S nginx && \
+    adduser -S -D -H -u 1000 -s /sbin/nologin -G nginx -g nginx nginx && \
     apk update && \
 # bash
     apk --no-cache add bash && \
@@ -45,7 +46,7 @@ RUN adduser -D -u 1000 nginx && \
         php${PHP_VER}-session \
         php${PHP_VER}-sqlite3 \
         php${PHP_VER}-zip && \
-    mkdir /var/run/php-fpm/ && adduser -D phpfpm && \
+    mkdir /var/run/php-fpm/ && \
     ln -s /dev/stderr /var/log/php${PHP_VER}/error.log && \
 # clear apk cache
     rm -rf /var/cache/apk/*
