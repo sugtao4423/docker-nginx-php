@@ -66,6 +66,7 @@ ENV PHP_FPM_USER="nginx" \
     PHP_TIMEZONE="Asia/Tokyo"
 
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY --chmod=755 entrypoint.sh /usr/local/bin/entrypoint.sh
 COPY --chmod=755 run.sh /usr/local/bin/run.sh
 
 VOLUME ["/html"]
@@ -73,4 +74,5 @@ EXPOSE 80
 
 WORKDIR /html
 
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["run.sh"]
