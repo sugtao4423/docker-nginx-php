@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
-php-fpm${PHP_VER} -D
-echo "php-fpm${PHP_VER} started"
+php-fpm${PHP_VER} -F &
+PHP_FPM_PID=$!
+echo "php-fpm${PHP_VER} started (PID: ${PHP_FPM_PID})"
 
-nginx -g 'daemon on;'
-echo 'nginx started'
+nginx -g 'daemon off;' &
+NGINX_PID=$!
+echo "nginx started (PID: ${NGINX_PID})"
 
-trap_term(){
-    echo 'exit'
-    exit 0
+graceful_shutdown() {
+  echo 'Received shutdown signal, starting graceful shutdown...'
+  kill -QUIT ${NGINX_PID}
+  kill -QUIT ${PHP_FPM_PID}
 }
-trap 'trap_term' TERM
 
-while :
-do
-    sleep 1
-done
+trap graceful_shutdown SIGINT SIGQUIT SIGTERM
+
+wait ${PHP_FPM_PID} ${NGINX_PID}
