@@ -65,9 +65,8 @@ ENV PHP_FPM_USER="nginx" \
     PHP_TIMEZONE="Asia/Tokyo"
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
+COPY --chmod=755 run.sh /usr/local/bin/run.sh
 
 EXPOSE 80
 
-CMD ["/run.sh"]
+CMD ["run.sh"]
