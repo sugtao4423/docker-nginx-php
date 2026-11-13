@@ -30,6 +30,7 @@ RUN addgroup -g 1000 -S nginx && \
 # php-fpm
     apk --no-cache add \
         php${PHP_VER} \
+        php${PHP_VER}-ctype \
         php${PHP_VER}-curl \
         php${PHP_VER}-dom \
         php${PHP_VER}-exif \
